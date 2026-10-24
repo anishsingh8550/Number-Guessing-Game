@@ -1,0 +1,75 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class task1 {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        Random random = new Random();
+
+        int totalRounds = 0;
+        int roundsWon = 0;
+
+        System.out.println("================================");
+        System.out.println("       NUMBER GUESSING GAME");
+        System.out.println("================================");
+
+        boolean playAgain = true;
+
+        while (playAgain) {
+
+            int number = random.nextInt(100) + 1;
+            int maxAttempts = 7;
+            int attempts = 0;
+            boolean guessed = false;
+
+            totalRounds++;
+
+            System.out.println("\nI have generated a number between 1 and 100.");
+            System.out.println("You have " + maxAttempts + " attempts.");
+
+            while (attempts < maxAttempts) {
+
+                System.out.print("Enter your guess: ");
+                int guess = sc.nextInt();
+                attempts++;
+
+                if (guess == number) {
+                    System.out.println("Correct! You guessed the number.");
+                    System.out.println("Attempts used: " + attempts);
+
+                    roundsWon++;
+                    guessed = true;
+                    break;
+
+                } else if (guess < number) {
+                    System.out.println("Too low! Try again.");
+
+                } else {
+                    System.out.println("Too high! Try again.");
+                }
+            }
+
+            if (!guessed) {
+                System.out.println("Sorry! You have used all attempts.");
+                System.out.println("The correct number was: " + number);
+            }
+
+            System.out.print("\nDo you want to play another round? (yes/no): ");
+            String choice = sc.next();
+
+            if (!choice.equalsIgnoreCase("yes")) {
+                playAgain = false;
+            }
+        }
+
+        System.out.println("\n================================");
+        System.out.println("             SCORE");
+        System.out.println("================================");
+        System.out.println("Total Rounds : " + totalRounds);
+        System.out.println("Rounds Won   : " + roundsWon);
+
+        sc.close();
+    }
+}
